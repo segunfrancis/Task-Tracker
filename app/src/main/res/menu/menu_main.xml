@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.segunfrancis.tasktracker.MainActivity">
+    <item
+        android:id="@+id/fragment_home"
+        android:title="@string/action_home"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/fragment_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/fragment_notifications"
+        android:title="@string/action_notifications"
+        android:icon="@drawable/ic_notification"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/fragment_settings"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="ifRoom" />
+</menu>
