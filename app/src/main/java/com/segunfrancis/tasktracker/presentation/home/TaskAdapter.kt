@@ -34,6 +34,16 @@ class TaskAdapter(
             editButton.setOnClickListener { onEditClick.invoke(task) }
             deleteButton.setOnClickListener { onDeleteClick.invoke(task) }
             root.setOnClickListener { onItemClick.invoke(task) }
+            val backgroundColors = listOf(
+                R.color.background_green,
+                R.color.dull_yellow,
+                R.color.rich_blue,
+                R.color.peach,
+                R.color.harvest_pink,
+                R.color.light_green
+            )
+            val randomInt = (backgroundColors.indices).random()
+            parent.setBackgroundResource(backgroundColors[randomInt])
         }
     }
 

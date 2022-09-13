@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.MaterialToolbar
@@ -26,10 +28,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             onDeleteClick = ::onDeleteClick
         )
     }
-
     private val toolbar: MaterialToolbar? by lazy {
         activity?.findViewById(R.id.toolbar)
     }
+    private var currentTask: TaskEntity? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,16 +50,35 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupClickListeners() = with(binding) {
         saveButton.setOnClickListener {
-            if (titleTextField.text.isNullOrBlank()) return@setOnClickListener
-            if (detailsTextField.text.isNullOrBlank()) return@setOnClickListener
+            if (titleTextField.text.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Title cannot be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (detailsTextField.text.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Details cannot be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val task = TaskEntity(
                 id = System.currentTimeMillis(),
                 title = titleTextField.text.toString().trim(),
                 details = detailsTextField.text.toString().trim()
             )
-            viewModel.addTask(task)
+            if (viewModel.uiState.value is TaskUiState.EditTask) {
+                currentTask?.let { cTask -> viewModel.updateTask(task.copy(id = cTask.id)) }
+            } else {
+                viewModel.addTask(task)
+            }
+            currentTask = null
         }
+
         toolbar?.setNavigationOnClickListener { viewModel.onBackClick() }
+
+        editButton.setOnClickListener {
+            currentTask?.let { cTask ->
+                viewModel.onEditClick(cTask)
+            }
+            currentTask = null
+        }
     }
 
     private fun handleUiStates(state: TaskUiState) {
@@ -68,22 +89,42 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 Toast.LENGTH_SHORT
             ).show()
             TaskUiState.Idle -> renderIdleState()
-            is TaskUiState.Success -> setupList(state.tasks)
+            is TaskUiState.Success -> renderSuccess(
+                tasks = state.tasks,
+                progresses = state.progresses,
+                colours = state.colours
+            )
             is TaskUiState.EditTask -> renderEditTaskState(state.task)
             is TaskUiState.ViewTask -> renderViewTaskState(state.task)
         }
     }
 
-    private fun setupList(tasks: List<TaskEntity>) = with(binding) {
-        taskAdapter.submitList(tasks)
-        toolbar?.setNavigationIcon(null)
-    }
+    private fun renderSuccess(tasks: List<TaskEntity>, progresses: List<Int>, colours: List<Int>) =
+        with(binding) {
+            taskAdapter.submitList(tasks)
+            toolbar?.navigationIcon = null
+
+            val progressViews = mutableListOf(
+                progressView1,
+                progressView2,
+                progressView3,
+                progressView4,
+                progressView5,
+                progressView6
+            )
+            progressViews.forEachIndexed { index, progressView ->
+                progressView.progress = progresses[index].toFloat()
+                progressView.highlightView.color = ContextCompat.getColor(requireContext(), colours[index])
+            }
+            progressGroup.isGone = tasks.isEmpty()
+        }
 
     private fun renderEditTaskState(task: TaskEntity) = with(binding) {
         titleTextField.setText(task.title)
         detailsTextField.setText(task.details)
         setTextFieldStates(isEditable = true)
         toolbar?.setNavigationIcon(R.drawable.ic_back)
+        currentTask = task
     }
 
     private fun renderViewTaskState(task: TaskEntity) = with(binding) {
@@ -91,6 +132,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         detailsTextField.setText(task.details)
         setTextFieldStates(isEditable = false)
         toolbar?.setNavigationIcon(R.drawable.ic_back)
+        currentTask = task
     }
 
     private fun renderIdleState() = with(binding) {
@@ -125,6 +167,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun onDeleteClick(task: TaskEntity) {
         viewModel.deleteTask(task.id)
+        currentTask = null
     }
 
     override fun onDestroyView() {

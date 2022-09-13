@@ -6,4 +6,13 @@
     <color name="secondary">#2D2F48</color>
     <color name="text_field_background">#B8FDBB</color>
     <color name="checkbox_tint">#1E1F4B</color>
+    <color name="progress_background">#979798</color>
+
+    <!-- Random background colors -->
+    <color name="light_green">#B8FDBB</color>
+    <color name="peach">#CAB8FD</color>
+    <color name="harvest_pink">#FDB8B8</color>
+    <color name="dull_yellow">#FDE1B8</color>
+    <color name="rich_blue">#5398FF</color>
+    <color name="background_green">#52BB69</color>
 </resources>

@@ -32,10 +32,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:contentDescription="@string/desc_image"
-            android:padding="8dp"
             android:clickable="true"
+            android:contentDescription="@string/desc_image"
             android:focusable="true"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="@id/titleTextField"
             app:layout_constraintEnd_toStartOf="@id/editButton"
             app:layout_constraintTop_toTopOf="@id/titleTextField"
@@ -46,10 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:contentDescription="@string/desc_image"
-            android:padding="8dp"
             android:clickable="true"
+            android:contentDescription="@string/desc_image"
             android:focusable="true"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="@id/titleTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/titleTextField"
@@ -65,11 +65,11 @@
             android:fontFamily="@font/poppins"
             android:gravity="top"
             android:hint="@string/text_details"
-            android:textIsSelectable="true"
             android:inputType="textCapSentences|textMultiLine"
             android:padding="10dp"
             android:textColor="@color/secondary"
             android:textColorHint="@color/secondary"
+            android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleTextField" />
@@ -189,11 +189,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:contentDescription="@string/desc_image"
-            android:padding="4dp"
-            android:clickable="true"
-            android:focusable="true"
             android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:contentDescription="@string/desc_image"
+            android:focusable="true"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@id/tasksHeaderText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tasksHeaderText"
@@ -202,13 +202,186 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksList"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:scrollbars="vertical"
-            tools:listitem="@layout/item_task"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="300dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tasksHeaderText" />
+            app:layout_constraintTop_toBottomOf="@id/tasksHeaderText"
+            tools:listitem="@layout/item_task" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/progressView1"
+            android:layout_width="10dp"
+            android:layout_height="@dimen/progress_height"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@id/progressView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tasksList"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorBackground="@color/progress_background"
+            app:progressView_colorProgress="@color/checkbox_tint"
+            app:progressView_orientation="vertical"
+            app:progressView_progress="80"
+            app:progressView_radius="4dp" />
+
+        <TextView
+            android:id="@+id/progressView1Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/text_task_1"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/progressView1"
+            app:layout_constraintStart_toStartOf="@id/progressView1"
+            app:layout_constraintTop_toBottomOf="@id/progressView1" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/progressView2"
+            android:layout_width="10dp"
+            android:layout_height="@dimen/progress_height"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@id/progressView3"
+            app:layout_constraintStart_toEndOf="@id/progressView1"
+            app:layout_constraintTop_toBottomOf="@id/tasksList"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorBackground="@color/progress_background"
+            app:progressView_colorProgress="@color/checkbox_tint"
+            app:progressView_orientation="vertical"
+            app:progressView_progress="80"
+            app:progressView_radius="4dp" />
+
+        <TextView
+            android:id="@+id/progressView2Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/text_task_2"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/progressView2"
+            app:layout_constraintStart_toStartOf="@id/progressView2"
+            app:layout_constraintTop_toBottomOf="@id/progressView2" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/progressView3"
+            android:layout_width="10dp"
+            android:layout_height="@dimen/progress_height"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/progressView4"
+            app:layout_constraintStart_toEndOf="@id/progressView2"
+            app:layout_constraintTop_toBottomOf="@id/tasksList"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorBackground="@color/progress_background"
+            app:progressView_colorProgress="@color/checkbox_tint"
+            app:progressView_orientation="vertical"
+            app:progressView_progress="80"
+            app:progressView_radius="4dp" />
+
+        <TextView
+            android:id="@+id/progressView3Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/text_task_3"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/progressView3"
+            app:layout_constraintStart_toStartOf="@id/progressView3"
+            app:layout_constraintTop_toBottomOf="@id/progressView3" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/progressView4"
+            android:layout_width="10dp"
+            android:layout_height="@dimen/progress_height"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/progressView5"
+            app:layout_constraintStart_toEndOf="@id/progressView3"
+            app:layout_constraintTop_toBottomOf="@id/tasksList"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorBackground="@color/progress_background"
+            app:progressView_colorProgress="@color/checkbox_tint"
+            app:progressView_orientation="vertical"
+            app:progressView_progress="80"
+            app:progressView_radius="4dp" />
+
+        <TextView
+            android:id="@+id/progressView4Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/text_task_4"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/progressView4"
+            app:layout_constraintStart_toStartOf="@id/progressView4"
+            app:layout_constraintTop_toBottomOf="@id/progressView4" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/progressView5"
+            android:layout_width="10dp"
+            android:layout_height="@dimen/progress_height"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/progressView6"
+            app:layout_constraintStart_toEndOf="@id/progressView4"
+            app:layout_constraintTop_toBottomOf="@id/tasksList"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorBackground="@color/progress_background"
+            app:progressView_colorProgress="@color/checkbox_tint"
+            app:progressView_orientation="vertical"
+            app:progressView_progress="80"
+            app:progressView_radius="4dp" />
+
+        <TextView
+            android:id="@+id/progressView5Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/text_task_5"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/progressView5"
+            app:layout_constraintStart_toStartOf="@id/progressView5"
+            app:layout_constraintTop_toBottomOf="@id/progressView5" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/progressView6"
+            android:layout_width="10dp"
+            android:layout_height="@dimen/progress_height"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/progressView5"
+            app:layout_constraintTop_toBottomOf="@id/tasksList"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorBackground="@color/progress_background"
+            app:progressView_colorProgress="@color/checkbox_tint"
+            app:progressView_orientation="vertical"
+            app:progressView_progress="80"
+            app:progressView_radius="4dp" />
+
+        <TextView
+            android:id="@+id/progressView1Label6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/text_task_6"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/progressView6"
+            app:layout_constraintStart_toStartOf="@id/progressView6"
+            app:layout_constraintTop_toBottomOf="@id/progressView6" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/progressGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="progressView1, progressView2,
+            progressView3, progressView4, progressView5, progressView6,
+            progressView1Label6, progressView2Label, progressView3Label,
+             progressView4Label, progressView5Label, progressView1Label" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
