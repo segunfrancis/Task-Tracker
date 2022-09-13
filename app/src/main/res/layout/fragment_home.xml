@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".presentation.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -65,6 +65,7 @@
             android:fontFamily="@font/poppins"
             android:gravity="top"
             android:hint="@string/text_details"
+            android:textIsSelectable="true"
             android:inputType="textCapSentences|textMultiLine"
             android:padding="10dp"
             android:textColor="@color/secondary"

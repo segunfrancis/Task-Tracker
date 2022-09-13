@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.segunfrancis.tasktracker.MainActivity">
+    tools:context="com.segunfrancis.tasktracker.presentation.MainActivity">
     <item
         android:id="@+id/fragment_home"
         android:title="@string/action_home"
